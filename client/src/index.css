@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900 antialiased;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+  }
+
+  /* Focus ring override */
+  :focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .interactive-row {
+    transition: background-color 120ms ease, box-shadow 120ms ease;
+  }
+  .interactive-row:hover {
+    background-color: #f0f9ff;
+  }
+
+  /* Card lift */
+  .card-hover {
+    transition: box-shadow 180ms ease, transform 180ms ease;
+  }
+  .card-hover:hover {
+    box-shadow: 0 4px 16px 0 rgba(0,0,0,0.08);
+    transform: translateY(-1px);
+  }
+
+  /* Fade-in for page content */
+  .page-enter {
+    animation: fadeSlideIn 200ms ease both;
+  }
+
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Pulse ring for notification badge */
+  .badge-pulse {
+    animation: badgePulse 2s ease-in-out infinite;
+  }
+
+  @keyframes badgePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.15); }
+  }
+
+  /* Sidebar active indicator */
+  .nav-active-bar {
+    position: relative;
+  }
+  .nav-active-bar::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 18px;
+    background: #2563eb;
+    border-radius: 0 3px 3px 0;
+  }
+
+  /* Button press */
+  .btn-press:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+
+  /* Shimmer animation for skeletons */
+  .shimmer {
+    background: linear-gradient(90deg, #f3f4f6 25%, #e9eaec 50%, #f3f4f6 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+  }
+  @keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* Tooltip fade */
+  .tooltip-enter {
+    animation: tooltipIn 120ms ease both;
+  }
+  @keyframes tooltipIn {
+    from { opacity: 0; transform: translateX(-4px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  /* Modal entrance */
+  .modal-enter {
+    animation: modalIn 180ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.95) translateY(8px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* Dropdown entrance */
+  .dropdown-enter {
+    animation: dropIn 150ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes dropIn {
+    from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+}
